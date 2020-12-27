@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-//import { Provider } from 'react-redux';
-//import { createStore, combineReducers, applyMiddleware } from 'redux';
-//import ReduxThunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { SafeAreaView, StyleSheet } from 'react-native';
 
 import QuizzNavigator from './navigation/QuizzNavigator';
-//import quizzReducer from './store/reducers/quizz';
+import screenReducer from './store/reducers/screen';
 
-/*
+
 const rootReducer = combineReducers({
-  quizz: quizzReducer,
+  screen: screenReducer,
 });
-*/
-//const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -43,9 +43,11 @@ export default function App() {
   };
 
   return (
+    <Provider store={store}>
       <SafeAreaView style={styles.screen}>
         <QuizzNavigator />
       </SafeAreaView>
+    </Provider>
   );
 }
 

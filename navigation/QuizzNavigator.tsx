@@ -5,6 +5,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { Ionicons } from '@expo/vector-icons';
+
 import ParamsScreen from '../screens/ParamsScreen';
 import NewQuizzScreen from '../screens/NewQuizzScreen';
 import SelectThemeScreen from '../screens/SelectThemeScreen';
@@ -66,12 +68,30 @@ const MainNavigator = () => {
                     }
                 }}>
                 <Tab.Screen 
-                    name="PlayQuizz" 
+                    name="Quizz" 
                     component={Quizz} 
+                    options={{
+                        tabBarIcon: (tabInfo) => {
+                            return <Ionicons 
+                                name='md-play' 
+                                size={25} 
+                                color={tabInfo.color}
+                            />;
+                        }
+                    }}
                 />
                 <Tab.Screen 
-                    name="EditQuizz" 
+                    name="Editer" 
                     component={Edit} 
+                    options={{
+                        tabBarIcon: (tabInfo) => {
+                            return <Ionicons 
+                                name='md-brush' 
+                                size={25} 
+                                color={tabInfo.color}
+                            />;
+                        }
+                    }}
                 />
             </Tab.Navigator>
         </NavigationContainer>
