@@ -23,6 +23,7 @@ const defaultStackNavOptions = {
         fontFamily: 'openSans-b',
         fontSize: 18,
     },
+    cardStyle: { backgroundColor: '#fff'}
 };
 
 const Quizz = () => {

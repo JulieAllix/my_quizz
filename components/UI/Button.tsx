@@ -17,8 +17,9 @@ const MyButton = props => {
     return (
         <TouchableOpacity style={{
             ...styles.button, 
-            width: orientation === 'vertical' ? screenWidth / 3 : screenWidth / 4.5,
-            padding: orientation === 'vertical' ? 7 : 5,
+            backgroundColor: props.color === 'primary' ? Colors.primaryColor : Colors.accentColor,
+            width: orientation === 'vertical' ? '100%' : screenWidth / 4.5,
+            padding: orientation === 'vertical' ? 10 : 5,
             }} onPress={props.onPress}>
             <Text style={{
                 ...styles.text,
@@ -32,13 +33,14 @@ const MyButton = props => {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: Colors.accentColor,
-        marginVertical: 10,
-        borderRadius: 5,
+        borderRadius: 10,
+        marginBottom: 10
     },
     text: {
         color: 'white',
         textAlign: 'center',
+        fontFamily: 'openSans',
+        fontSize: 20
     },
 });
 
