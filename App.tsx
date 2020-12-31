@@ -18,13 +18,10 @@ const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const fetchFonts = () => {
   return Font.loadAsync({
-    'abril': require('./assets/fonts/AbrilFatface-Regular.ttf'),
+    'montserrat': require('./assets/fonts/Montserrat-ExtraBold.ttf'),
     'poppins': require('./assets/fonts/Poppins-Regular.ttf'),
-    'poppins-b': require('./assets/fonts/Poppins-Bold.ttf')
-    /*
-    'merriweather': require('./assets/fonts/Merriweather-Regular.ttf'),
-    'montserrat': require('./assets/fonts/Montserrat-Regular.ttf')
-    */
+    'openSans-b': require('./assets/fonts/OpenSans-Bold.ttf'),
+    'openSans': require('./assets/fonts/OpenSans-Regular.ttf'),
   });
 };
 

@@ -12,21 +12,31 @@ import NewQuizzScreen from '../screens/NewQuizzScreen';
 import SelectThemeScreen from '../screens/SelectThemeScreen';
 import NewThemeScreen from '../screens/NewThemeScreen';
 
+import Colors from '../constants/Colors';
+
 //const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+const defaultStackNavOptions = {
+    headerTitleStyle: {
+        fontFamily: 'openSans-b',
+        fontSize: 18,
+    },
+};
 
 const Quizz = () => {
     return (
         <Stack.Navigator
             initialRouteName="Paramètres"
             headerMode="screen"
+            screenOptions={defaultStackNavOptions}
         >
             <Stack.Screen 
                 name="Paramètres" 
                 component={ParamsScreen} 
                 options={({ }) => ({ 
-                    title: 'Paramètres du quizz',
+                    title: 'Parameters of the quizz',
                 })}
             />
             <Stack.Screen 
@@ -42,12 +52,13 @@ const Edit = () => {
         <Stack.Navigator
             initialRouteName="SelectTheme"
             headerMode="screen"
+            screenOptions={defaultStackNavOptions}
         >
             <Stack.Screen 
                 name="SelectTheme" 
                 component={SelectThemeScreen} 
                 options={({ }) => ({ 
-                    title: 'Choix du thème',
+                    title: 'Themes',
                 })}
             />
             <Stack.Screen 
@@ -63,8 +74,9 @@ const MainNavigator = () => {
         <NavigationContainer>
             <Tab.Navigator
                 tabBarOptions={{
+                    activeTintColor: Colors.primaryColor,
                     labelStyle: {
-                        fontFamily: 'poppins'
+                        fontFamily: 'openSans-b'
                     }
                 }}>
                 <Tab.Screen 
@@ -81,7 +93,7 @@ const MainNavigator = () => {
                     }}
                 />
                 <Tab.Screen 
-                    name="Editer" 
+                    name="Edit" 
                     component={Edit} 
                     options={{
                         tabBarIcon: (tabInfo) => {
