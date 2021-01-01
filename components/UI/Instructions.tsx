@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         marginBottom: 25,
     },
     text: {
-        fontSize: 18,
+        fontSize: 16,
         fontFamily: 'openSans',
         textAlign: 'center'
     },

@@ -8,12 +8,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 
 import ParamsScreen from '../screens/ParamsScreen';
-import NewQuizzScreen from '../screens/NewQuizzScreen';
 import SelectThemeScreen from '../screens/SelectThemeScreen';
 import CreateThemeScreen from '../screens/CreateThemeScreen';
 import CreateQuestionScreen from '../screens/CreateQuestionScreen';
 import EditThemeScreen from '../screens/EditThemeScreen';
 import EditQuestionScreen from '../screens/EditQuestionScreen';
+import QuizzScreen from '../screens/QuizzScreen';
 
 import Colors from '../constants/Colors';
 
@@ -29,7 +29,7 @@ const defaultStackNavOptions = {
     cardStyle: { backgroundColor: '#fff'}
 };
 
-const Quizz = () => {
+const Quizz = ({navigation}) => {
     return (
         <Stack.Navigator
             initialRouteName="Paramètres"
@@ -39,13 +39,16 @@ const Quizz = () => {
             <Stack.Screen 
                 name="Paramètres" 
                 component={ParamsScreen} 
-                options={({ }) => ({ 
+                options={(navData) => ({ 
                     title: 'Parameters of the quizz',
                 })}
             />
             <Stack.Screen 
-                name="NewQuizz" 
-                component={NewQuizzScreen} 
+                name="Quizz screen" 
+                component={QuizzScreen} 
+                options={(navData) => ({ 
+                    title: 'Quizz screen',
+                })}
             />
         </Stack.Navigator>
     )
