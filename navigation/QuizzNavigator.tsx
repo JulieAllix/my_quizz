@@ -13,6 +13,7 @@ import SelectThemeScreen from '../screens/SelectThemeScreen';
 import CreateThemeScreen from '../screens/CreateThemeScreen';
 import CreateQuestionScreen from '../screens/CreateQuestionScreen';
 import EditThemeScreen from '../screens/EditThemeScreen';
+import EditQuestionScreen from '../screens/EditQuestionScreen';
 
 import Colors from '../constants/Colors';
 
@@ -53,7 +54,7 @@ const Quizz = () => {
 const Edit = ({navigation}) => {
     return (
         <Stack.Navigator
-            initialRouteName="Edit theme"
+            initialRouteName="Themes"
             headerMode="screen"
             screenOptions={defaultStackNavOptions}
         >
@@ -83,6 +84,13 @@ const Edit = ({navigation}) => {
                 component={EditThemeScreen}
                 options={(navData) => ({ 
                     title: 'Edit theme',
+                })} 
+            />
+            <Stack.Screen 
+                name="Edit question" 
+                component={EditQuestionScreen}
+                options={(navData) => ({ 
+                    title: 'Edit question',
                 })} 
             />
         </Stack.Navigator>
