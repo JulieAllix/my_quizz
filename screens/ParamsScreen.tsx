@@ -4,7 +4,10 @@ import {
     Text,  
 } from 'react-native';
 
-const ParamsScreen = () => {
+interface Props {
+}
+
+const ParamsScreen: React.FC<Props> = (props) => {
     return (
         <View>
             <Text>ParamsScreen</Text>

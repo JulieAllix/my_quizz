@@ -4,7 +4,10 @@ import {
     Text,  
 } from 'react-native';
 
-const NewQuizzScreen = () => {
+interface Props {
+}
+
+const NewQuizzScreen: React.FC<Props> = (props) => {
     return (
         <View>
             <Text>NewQuizzScreen</Text>

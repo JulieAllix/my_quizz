@@ -8,8 +8,12 @@ import { useSelector } from 'react-redux';
 
 import Colors from '../../constants/Colors';
 
+interface Props {
+    color: string,
+    onPress: () => void
+}
 
-const MyButton = props => {
+const CustomButton: React.FC<Props> = (props) => {
 
     let orientation = useSelector(state => state.screen.orientation);
     let screenWidth = useSelector(state => state.screen.availableDeviceWidth);
@@ -44,4 +48,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MyButton;
+export default CustomButton;

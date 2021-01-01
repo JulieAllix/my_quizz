@@ -5,11 +5,20 @@ import {
     StyleSheet
 } from 'react-native';
 
-import MyButton from '../components/UI/Button';
+import CustomButton from '../components/UI/CustomButton';
 import Instructions from '../components/UI/Instructions';
 import ThemeCard from '../components/ThemeCard';
 
-const SelectThemeScreen = () => {
+interface Props {
+    navigation: any,
+}
+
+const SelectThemeScreen: React.FC<Props> = (props) => {
+    const createNewTheme = () => {
+        props.navigation.navigate(
+            'New theme', 
+        );
+    }
     return (
         <View style={styles.screenWrapper}>
             <Instructions>Click on a theme to edit it or create a new one.</Instructions>
@@ -19,21 +28,21 @@ const SelectThemeScreen = () => {
                 <ThemeCard color={'accent'}>Theme name</ThemeCard>
                 <ThemeCard color={'primary'}>Theme name</ThemeCard>
             </View>
-            <MyButton color={'primary'}>Create a new theme</MyButton>
+            <CustomButton color={'primary'} onPress={createNewTheme}>Create a new theme</CustomButton>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     screenWrapper: {
-        padding: 20,
-        
+        padding: 25,
     },
     themesWrapper: {
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'row',
-        justifyContent: 'space-between' 
+        justifyContent: 'space-between',
+        marginBottom: 20
     },
 });
 

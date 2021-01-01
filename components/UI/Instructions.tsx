@@ -5,7 +5,10 @@ import {
     StyleSheet,
 } from 'react-native';
 
-const Instructions = props => {
+interface Props {
+}
+
+const Instructions: React.FC<Props> = (props) => {
 
     return (
         <View style={styles.textWrapper}>

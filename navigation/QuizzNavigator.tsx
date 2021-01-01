@@ -10,7 +10,8 @@ import { Ionicons } from '@expo/vector-icons';
 import ParamsScreen from '../screens/ParamsScreen';
 import NewQuizzScreen from '../screens/NewQuizzScreen';
 import SelectThemeScreen from '../screens/SelectThemeScreen';
-import NewThemeScreen from '../screens/NewThemeScreen';
+import CreateThemeScreen from '../screens/CreateThemeScreen';
+import CreateQuestionScreen from '../screens/CreateQuestionScreen';
 
 import Colors from '../constants/Colors';
 
@@ -48,7 +49,7 @@ const Quizz = () => {
     )
 }
 
-const Edit = () => {
+const Edit = ({navigation}) => {
     return (
         <Stack.Navigator
             initialRouteName="SelectTheme"
@@ -56,15 +57,25 @@ const Edit = () => {
             screenOptions={defaultStackNavOptions}
         >
             <Stack.Screen 
-                name="SelectTheme" 
+                name="Themes" 
                 component={SelectThemeScreen} 
-                options={({ }) => ({ 
+                options={(navData) => ({ 
                     title: 'Themes',
                 })}
             />
             <Stack.Screen 
-                name="NewTheme" 
-                component={NewThemeScreen} 
+                name="New theme" 
+                component={CreateThemeScreen}
+                options={(navData) => ({ 
+                    title: 'New theme',
+                })} 
+            />
+            <Stack.Screen 
+                name="New question" 
+                component={CreateQuestionScreen}
+                options={(navData) => ({ 
+                    title: 'New question',
+                })} 
             />
         </Stack.Navigator>
     )

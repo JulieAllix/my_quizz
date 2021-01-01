@@ -8,8 +8,11 @@ import { useSelector } from 'react-redux';
 
 import Colors from '../constants/Colors';
 
+interface Props {
+    color: string,
+}
 
-const ThemeCard = props => {
+const ThemeCard: React.FC<Props> = (props) => {
 
     let orientation = useSelector(state => state.screen.orientation);
     let screenWidth = useSelector(state => state.screen.availableDeviceWidth);
@@ -30,17 +33,17 @@ const ThemeCard = props => {
 
 const styles = StyleSheet.create({
     themeCardWrapper: {
-        width: '47%',
-        height: 125,
+        width: 155,
+        height: 150,
         display: "flex",
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 22,
+        marginBottom: 15,
         elevation: 5,
         shadowColor: 'black',
         shadowOpacity: 0.45,
-        shadowOffset: { width: 3, height: 5 },
-        shadowRadius: 4,
+        shadowOffset: { width: 1, height: 5 },
+        shadowRadius: 3,
     },
     themeCardText: {
         fontSize: 16,
