@@ -37,12 +37,12 @@ const ThemeCard: React.FC<Props> = (props) => {
 
 const styles = StyleSheet.create({
     themeCardWrapper: {
-        width: 155,
+        width: 156,
         height: 150,
         display: "flex",
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 15,
+        margin: 5,
         elevation: 5,
         shadowColor: 'black',
         shadowOpacity: 0.45,

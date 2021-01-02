@@ -14,9 +14,9 @@ interface Props {
 }
 
 const ParamsScreen: React.FC<Props> = (props) => {
-    const [questionStatus, setQuestionStatus] = useState<'question'|'answer'>('answer');
+    const [questionStatus, setQuestionStatus] = useState<'question'|'answer'>('question');
 
-    const handlePress = (value) => {
+    const handlePress = (value: any) => {
         setQuestionStatus(value)
     }
     const cancel = () => {
