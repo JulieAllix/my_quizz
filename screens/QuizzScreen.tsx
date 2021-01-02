@@ -5,15 +5,29 @@ import {
     StyleSheet
 } from 'react-native';
 
+import {THEME} from '../data/dummy-data.js';
+
 import Instructions from '../components/UI/Instructions';
 import CustomButton from '../components/UI/CustomButton';
 import QuestionCard from '../components/QuestionCard';
 
 interface Props {
-    navigation: any
+    navigation: any,
+    route: any
 }
 
-const ParamsScreen: React.FC<Props> = (props) => {
+const QuizzScreen: React.FC<Props> = ({ route, navigation }) => {
+    const {themeId} = route.params;
+    const thmId = JSON.parse(JSON.stringify(themeId));
+    const selectedTheme = THEME.find((theme: any) => theme.id == thmId);
+
+    // To set the header title dynamically
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            title: selectedTheme.name,
+        });
+    });
+
     const [questionStatus, setQuestionStatus] = useState<'question'|'answer'>('question');
 
     const handlePress = (value: any) => {
@@ -55,4 +69,4 @@ const styles = StyleSheet.create({
     buttonsWrapper: {},
 });
 
-export default ParamsScreen;
+export default QuizzScreen;
