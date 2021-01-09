@@ -24,7 +24,10 @@ const SelectThemeScreen: React.FC<Props> = (props) => {
     };
 
     const handlePress = (themeId: string) => {
-
+        props.navigation.navigate(
+            'Edit theme', 
+            {themeId: themeId}
+        );
     };
 
     const renderThemeItem = (itemData: any) => {

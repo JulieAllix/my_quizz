@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 import { 
     View,   
     StyleSheet
@@ -7,23 +8,35 @@ import {
 import CustomInput from '../components/UI/CustomInput';
 import CustomButton from '../components/UI/CustomButton';
 
+import { createQuestion } from '../store/actions/quizz';
+
 interface Props {
-    navigation: any
+    navigation: any,
+    route: any
 }
 
-const CreateQuestionScreen: React.FC<Props> = (props) => {
+const CreateQuestionScreen: React.FC<Props> = ({ route, navigation }) => {
+    const dispatch = useDispatch();
+    const {themeId} = route.params;
+
     const [questionText, setQuestionText] = useState<string>('');
     const [answerText, setAnswerText] = useState<string>('');
 
     const addNewQuestion = () => {
-        props.navigation.navigate(
-            'New question', 
-        );
+        dispatch(createQuestion(themeId, questionText, answerText));
+        setTimeout(() => {
+            navigation.navigate(
+                'New question', 
+            );
+        }, 500)
     };
     const validateQuestion = () => {
-        props.navigation.navigate(
-            'Themes', 
-        );
+        dispatch(createQuestion(themeId, questionText, answerText));
+        setTimeout(() => {
+            navigation.navigate(
+                'Themes', 
+            );
+        }, 500)
     };
     return (
         <View style={styles.screen}>

@@ -5,8 +5,6 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import {THEMES} from '../data/dummy-data.js';
-
 import Instructions from '../components/UI/Instructions';
 import CustomButton from '../components/UI/CustomButton';
 import QuestionCard from '../components/QuestionCard';
@@ -19,7 +17,8 @@ interface Props {
 const QuizzScreen: React.FC<Props> = ({ route, navigation }) => {
     const {themeId} = route.params;
     const thmId = JSON.parse(JSON.stringify(themeId));
-    const selectedTheme = THEMES.find((theme: any) => theme.id == thmId);
+    const themes = useSelector(state => state.quizz.themes);
+    const selectedTheme = themes.find((theme: any) => theme.id == thmId);
     const currentQuizz = useSelector(state => state.quizz.currentQuizz);
 
     // To set the header title dynamically

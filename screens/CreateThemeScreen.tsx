@@ -4,6 +4,7 @@ import {
     View,   
     StyleSheet
 } from 'react-native';
+import {v4 as uuidv4} from 'uuid';
 
 import CustomInput from '../components/UI/CustomInput';
 import CustomButton from '../components/UI/CustomButton';
@@ -19,10 +20,12 @@ const CreateThemeScreen: React.FC<Props> = (props) => {
     const [inputText, setInputText] = useState<string>('');
 
     const validateNewTheme = () => {
-        dispatch(createTheme(inputText));
+        const newUid = uuidv4();
+        dispatch(createTheme(inputText, newUid));
         setTimeout(() => {
             props.navigation.navigate(
                 'New question', 
+                {themeId: newUid}
             );
         }, 500)
     }

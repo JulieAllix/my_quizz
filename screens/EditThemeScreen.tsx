@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { useSelector } from 'react-redux';
 import { 
     View,  
     StyleSheet,
@@ -10,15 +11,28 @@ import CustomButton from '../components/UI/CustomButton';
 import QuestionCard from '../components/QuestionCard';
 
 interface Props {
+    route: any,
     navigation: any,
 }
 
-const EditThemeScreen: React.FC<Props> = (props) => {
+const EditThemeScreen: React.FC<Props> = ({ route, navigation }) => {
+    const {themeId} = route.params;
+    const thmId = JSON.parse(JSON.stringify(themeId));
     const [inputText, setInputText] = useState<string>('');
+    const themes = useSelector(state => state.quizz.themes);
+    const selectedTheme = themes.find((theme: any) => theme.id == thmId);
+
+    // To set the header title dynamically
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            title: 'Edit : ' + selectedTheme.name,
+        });
+    });
 
     const addNewQuestion = () => {
-        props.navigation.navigate(
+        navigation.navigate(
             'New question', 
+            {themeId: thmId}
         );
     };
     const deleteTheme = () => {
