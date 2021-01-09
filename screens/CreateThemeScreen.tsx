@@ -1,29 +1,37 @@
 import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 import { 
-    View, 
-    Text,  
+    View,   
     StyleSheet
 } from 'react-native';
 
 import CustomInput from '../components/UI/CustomInput';
 import CustomButton from '../components/UI/CustomButton';
 
+import { createTheme } from '../store/actions/quizz';
+
 interface Props {
     navigation: any
 }
 
 const CreateThemeScreen: React.FC<Props> = (props) => {
+    const dispatch = useDispatch();
     const [inputText, setInputText] = useState<string>('');
+
     const validateNewTheme = () => {
-        props.navigation.navigate(
-            'New question', 
-        );
+        dispatch(createTheme(inputText));
+        setTimeout(() => {
+            props.navigation.navigate(
+                'New question', 
+            );
+        }, 500)
     }
     const cancel = () => {
         props.navigation.navigate(
             'Themes', 
         );
     };
+
     return (
         <View style={styles.screen}>
             <CustomInput 

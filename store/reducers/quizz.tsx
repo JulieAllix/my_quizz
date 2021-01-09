@@ -1,11 +1,15 @@
 import { QUESTIONS } from '../../data/dummy-data.js';
+import { THEMES } from '../../data/dummy-data.js';
+import Theme from '../../models/theme.js';
 
 import { 
-    CREATE_QUIZZ
+    CREATE_QUIZZ,
+    CREATE_THEME
 } from '../actions/quizz';
 
 const initialState = {
-    currentQuizz: []
+    currentQuizz: [],
+    themes: THEMES
 };
 
 const quizzReducer = (state = initialState, action: any) => {
@@ -30,6 +34,21 @@ const quizzReducer = (state = initialState, action: any) => {
                 ...state,
                 currentQuizz: newQuizz
             }
+        case CREATE_THEME:
+            const themeName = action.name;
+            const newTheme = new Theme(
+                't90',
+                themeName,
+                'accent'
+            );
+            
+            console.log('newTheme', newTheme);
+
+            return {
+                ...state,
+                themes: state.themes.concat(newTheme)
+            }
+
         default: 
             return state;
     }

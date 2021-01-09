@@ -1,7 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { 
     View, 
-    Text,  
+    FlatList,  
     StyleSheet
 } from 'react-native';
 
@@ -14,35 +15,51 @@ interface Props {
 }
 
 const SelectThemeScreen: React.FC<Props> = (props) => {
+    const themes = useSelector(state => state.quizz.themes);
+
     const createNewTheme = () => {
         props.navigation.navigate(
             'New theme', 
         );
-    }
+    };
+
+    const handlePress = (themeId: string) => {
+
+    };
+
+    const renderThemeItem = (itemData: any) => {
+        return (
+            <ThemeCard color={itemData.item.color} onPress={() => handlePress(itemData.item.id)}>{itemData.item.name}</ThemeCard>
+        );
+    };
+
     return (
         <View style={styles.screenWrapper}>
-            <Instructions>Click on a theme to edit it or create a new one.</Instructions>
-            <View style={styles.themesWrapper}>
-                <ThemeCard color={'primary'}>Theme name</ThemeCard>
-                <ThemeCard color={'accent'}>Theme name</ThemeCard>
-                <ThemeCard color={'accent'}>Theme name</ThemeCard>
-                <ThemeCard color={'primary'}>Theme name</ThemeCard>
-            </View>
-            <CustomButton color={'primary'} onPress={createNewTheme}>Create a new theme</CustomButton>
+                <Instructions type={'regular'}>Create a new theme or click on an existing theme to edit it.</Instructions>
+                <View style={styles.themesWrapper}>
+                    <FlatList 
+                        keyExtractor={(item, index) => item.id}
+                        data={themes}
+                        renderItem={renderThemeItem}
+                        numColumns={2}
+                    />
+                </View>
+                <CustomButton color={'primary'} onPress={createNewTheme}>Create a new theme</CustomButton>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     screenWrapper: {
-        padding: 25,
+        padding: 20,
+        display: 'flex',
+        flex: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 105
     },
     themesWrapper: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginBottom: 20
+        marginBottom: 10
     },
 });
 

@@ -6,10 +6,16 @@ export const THEMES = [
     new Theme('t2', 'Anglais', 'accent'),
     new Theme('t3', 'Allemand', 'accent'),
     new Theme('t4', 'Catalan', 'primary'),
+    /*
     new Theme('t5', 'Espagnol', 'primary'),
     new Theme('t6', 'Anglais', 'accent'),
     new Theme('t7', 'Allemand', 'accent'),
     new Theme('t8', 'Catalan', 'primary'),
+    new Theme('t9', 'Espagnol', 'primary'),
+    new Theme('t10', 'Anglais', 'accent'),
+    new Theme('t11', 'Allemand', 'accent'),
+    new Theme('t12', 'Catalan', 'primary'),
+    */
 ];
 
 export const QUESTIONS = [

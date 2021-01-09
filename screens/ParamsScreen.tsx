@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { 
     View,  
     StyleSheet,
@@ -10,8 +10,6 @@ import CustomInput from '../components/UI/CustomInput';
 import Instructions from '../components/UI/Instructions';
 import ThemeCard from '../components/ThemeCard';
 
-import {THEMES} from "../data/dummy-data.js";
-import {QUESTIONS} from "../data/dummy-data.js";
 import { createQuizz } from '../store/actions/quizz';
 
 interface Props {
@@ -23,6 +21,7 @@ const ParamsScreen: React.FC<Props> = (props) => {
 
     const [inputText, setInputText] = useState<number|null>(null);
     const [instructionsText, setInstructionsText] = useState<'regular'|'error'>('regular');
+    const themes = useSelector(state => state.quizz.themes);
 
     const handlePress = (themeId: string) => {
         if (inputText === null || inputText == 0) {
@@ -61,7 +60,7 @@ const ParamsScreen: React.FC<Props> = (props) => {
                 <Instructions type={instructionsText === 'regular' ? 'regular' : 'error'}>{instructionsText === 'regular' ? 'Click on a theme to select it' : 'Please select a number of questions'}</Instructions>
                 <FlatList 
                     keyExtractor={(item, index) => item.id}
-                    data={THEMES}
+                    data={themes}
                     renderItem={renderThemeItem}
                     numColumns={2}
                 />
