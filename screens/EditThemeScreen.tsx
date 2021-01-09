@@ -31,6 +31,7 @@ const EditThemeScreen: React.FC<Props> = (props) => {
                 label={'Theme name'} 
                 value={inputText}
                 setValue={setInputText}
+                keyboardType={'default'}
             />
             <View style={styles.questionsWrapper}>
                 <Text style={styles.questionsTitle}>Questions</Text>

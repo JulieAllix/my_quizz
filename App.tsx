@@ -8,10 +8,11 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 
 import QuizzNavigator from './navigation/QuizzNavigator';
 import screenReducer from './store/reducers/screen';
-
+import quizzReducer from './store/reducers/quizz';
 
 const rootReducer = combineReducers({
   screen: screenReducer,
+  quizz: quizzReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

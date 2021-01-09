@@ -34,11 +34,13 @@ const EditQuestionScreen: React.FC<Props> = (props) => {
                     label={'Question'} 
                     value={questionText}
                     setValue={setQuestionText}
+                    keyboardType={'default'}
                 />
                 <CustomInput 
                     label={'Answer'} 
                     value={answerText}
                     setValue={setAnswerText}
+                    keyboardType={'default'}
                 />
             </View>
             <View style={styles.buttonsWrapper}>

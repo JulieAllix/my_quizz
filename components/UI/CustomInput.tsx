@@ -11,7 +11,8 @@ import Colors from '../../constants/Colors';
 interface Props {
     label: string,
     value: string,
-    setValue: (value: string) => void
+    setValue: (value: string) => void,
+    keyboardType: string
 }
 
 const CustomInput: React.FC<Props> = (props) => {
@@ -23,6 +24,8 @@ const CustomInput: React.FC<Props> = (props) => {
                 style={styles.input}
                 value={props.value}
                 onChangeText={(value) => props.setValue(value)}
+                keyboardType={props.keyboardType}
+                returnKeyType={'done'}
             />
         </View>
     );

@@ -4,15 +4,20 @@ import {
     View, 
     StyleSheet,
 } from 'react-native';
-
+import Colors from '../../constants/Colors'
 interface Props {
+    type: 'regular'|'error'
 }
 
 const Instructions: React.FC<Props> = (props) => {
 
     return (
         <View style={styles.textWrapper}>
-            <Text style={styles.text}>{props.children}</Text>
+            <Text style={{
+                ...styles.text, 
+                color: props.type === 'error' ? Colors.accentColor : 'black',
+                fontFamily: props.type === 'error' ? 'openSans-b' : 'openSans',
+                }}>{props.children}</Text>
         </View>
     );
 };

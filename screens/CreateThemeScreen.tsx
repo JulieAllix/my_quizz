@@ -30,6 +30,7 @@ const CreateThemeScreen: React.FC<Props> = (props) => {
                 label={'Theme name'} 
                 value={inputText}
                 setValue={setInputText}
+                keyboardType={'default'}
             />
             <View style={styles.buttonsWrapper}>
                 <CustomButton color={'accent'} onPress={cancel}>Cancel</CustomButton>

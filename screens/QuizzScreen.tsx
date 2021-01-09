@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import { 
-    View, 
-    Text,  
+    View,  
     StyleSheet
 } from 'react-native';
+import { useSelector } from 'react-redux';
 
-import {THEME} from '../data/dummy-data.js';
+import {THEMES} from '../data/dummy-data.js';
 
 import Instructions from '../components/UI/Instructions';
 import CustomButton from '../components/UI/CustomButton';
@@ -19,7 +19,8 @@ interface Props {
 const QuizzScreen: React.FC<Props> = ({ route, navigation }) => {
     const {themeId} = route.params;
     const thmId = JSON.parse(JSON.stringify(themeId));
-    const selectedTheme = THEME.find((theme: any) => theme.id == thmId);
+    const selectedTheme = THEMES.find((theme: any) => theme.id == thmId);
+    const currentQuizz = useSelector(state => state.quizz.currentQuizz);
 
     // To set the header title dynamically
     React.useLayoutEffect(() => {
@@ -29,27 +30,37 @@ const QuizzScreen: React.FC<Props> = ({ route, navigation }) => {
     });
 
     const [questionStatus, setQuestionStatus] = useState<'question'|'answer'>('question');
+    const [index, setIndex] = useState<number>(0);
 
     const handlePress = (value: any) => {
         setQuestionStatus(value)
     }
     const cancel = () => {
-        props.navigation.navigate(
+        navigation.navigate(
             'Paramètres', 
         );
     };
     const next = () => {
-
+        console.log('index', index);
+        console.log('currentQuizz.length', currentQuizz.length);
+        if(index < currentQuizz.length - 1) {
+            setIndex(index + 1);
+        } else {
+            navigation.navigate(
+                'Paramètres', 
+            );
+        }
+        
     };
-
+    //console.log('currentQuizz screen', currentQuizz);
     return (
         <View style={styles.screen}>
             <Instructions>Click on the card to see the answer</Instructions>
             {questionStatus === 'question' &&
-                <QuestionCard color={'primary'} onPress={() => handlePress('answer')}>Random question</QuestionCard>
+                <QuestionCard color={'primary'} onPress={() => handlePress('answer')}>{currentQuizz[index].question}</QuestionCard>
             }
             {questionStatus === 'answer' &&
-                <QuestionCard color={'accent'} onPress={() => handlePress('question')}>Answer to the question</QuestionCard>
+                <QuestionCard color={'accent'} onPress={() => handlePress('question')}>{currentQuizz[index].answer}</QuestionCard>
             }
             <View style={styles.buttonsWrapper}>
                 <CustomButton color={'accent'} onPress={cancel}>Cancel</CustomButton>

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
 import { 
-    View, 
-    Text,  
+    View,  
     StyleSheet,
     FlatList
 } from 'react-native';
@@ -10,20 +10,35 @@ import CustomInput from '../components/UI/CustomInput';
 import Instructions from '../components/UI/Instructions';
 import ThemeCard from '../components/ThemeCard';
 
-import {THEME} from "../data/dummy-data.js";
+import {THEMES} from "../data/dummy-data.js";
+import {QUESTIONS} from "../data/dummy-data.js";
+import { createQuizz } from '../store/actions/quizz';
 
 interface Props {
     navigation: any
 }
 
 const ParamsScreen: React.FC<Props> = (props) => {
-    const [inputText, setInputText] = useState<string>('');
+    const dispatch = useDispatch();
+
+    const [inputText, setInputText] = useState<number|null>(null);
+    const [instructionsText, setInstructionsText] = useState<'regular'|'error'>('regular');
 
     const handlePress = (themeId: string) => {
-        props.navigation.navigate(
-            'Quizz screen', 
-            {themeId: themeId}
-        );
+        if (inputText === null || inputText == 0) {
+            setInstructionsText('error');
+            setTimeout(() => {
+                setInstructionsText('regular')
+            }, 2000)
+        } else {
+            dispatch(createQuizz(themeId, inputText));
+            setTimeout(() => {
+                props.navigation.navigate(
+                    'Quizz screen', 
+                    {themeId: themeId}
+                );
+            }, 500)
+        }
     };
 
     const renderThemeItem = (itemData: any) => {
@@ -39,13 +54,14 @@ const ParamsScreen: React.FC<Props> = (props) => {
                     label={'Number of questions'} 
                     value={inputText}
                     setValue={setInputText}
+                    keyboardType={'number-pad'}
                 />
             </View>
             <View style={styles.themesWrapper}>
-                <Instructions>Click on a theme to select it</Instructions>
+                <Instructions type={instructionsText === 'regular' ? 'regular' : 'error'}>{instructionsText === 'regular' ? 'Click on a theme to select it' : 'Please select a number of questions'}</Instructions>
                 <FlatList 
                     keyExtractor={(item, index) => item.id}
-                    data={THEME}
+                    data={THEMES}
                     renderItem={renderThemeItem}
                     numColumns={2}
                 />
