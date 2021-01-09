@@ -4,12 +4,12 @@ import {
     View,   
     StyleSheet
 } from 'react-native';
-import {v4 as uuidv4} from 'uuid';
 
 import CustomInput from '../components/UI/CustomInput';
 import CustomButton from '../components/UI/CustomButton';
 
 import { createTheme } from '../store/actions/quizz';
+import {generateRandomUid} from '../service/random-uuid';
 
 interface Props {
     navigation: any
@@ -20,7 +20,7 @@ const CreateThemeScreen: React.FC<Props> = (props) => {
     const [inputText, setInputText] = useState<string>('');
 
     const validateNewTheme = () => {
-        const newUid = uuidv4();
+        const newUid = 't-' + generateRandomUid();
         dispatch(createTheme(inputText, newUid));
         setTimeout(() => {
             props.navigation.navigate(

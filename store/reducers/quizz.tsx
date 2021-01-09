@@ -3,7 +3,7 @@ import { THEMES } from '../../data/dummy-data.js';
 import Theme from '../../models/theme.js';
 import Question from '../../models/question.js';
 
-import {v4 as uuidv4} from 'uuid';
+import {generateRandomUid} from '../../service/random-uuid';
 
 import { 
     CREATE_QUIZZ,
@@ -48,7 +48,7 @@ const quizzReducer = (state = initialState, action: any) => {
             }
 
         case CREATE_QUESTION:
-            const questionUid = uuidv4();
+            const questionUid = 'q-' + generateRandomUid();
             const themeId = action.themeId;
             const question = action.question;
             const answer = action.answer;
