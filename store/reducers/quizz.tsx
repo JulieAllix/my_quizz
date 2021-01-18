@@ -8,6 +8,7 @@ import {generateRandomUid} from '../../service/random-uuid';
 import { 
     CREATE_QUIZZ,
     CREATE_THEME,
+    UPDATE_THEME,
     CREATE_QUESTION
 } from '../actions/quizz';
 
@@ -47,6 +48,24 @@ const quizzReducer = (state = initialState, action: any) => {
                 themes: state.themes.concat(newTheme)
             }
 
+        case UPDATE_THEME:
+            const updatedThemes = [...state.themes];
+            const updatedThemeUid = action.themeId;
+            const updatedThemeName = action.name;
+            const themeIndex = state.themes.findIndex(
+                theme => theme.id === updatedThemeUid
+            );
+            const updatedTheme = {
+                id: updatedThemeUid,
+                name: updatedThemeName,
+                color: 'primary'
+            };
+            updatedThemes[themeIndex] = updatedTheme;
+            
+            return {
+                ...state,
+                themes: updatedThemes
+            }
         case CREATE_QUESTION:
             const questionUid = 'q-' + generateRandomUid();
             const themeId = action.themeId;

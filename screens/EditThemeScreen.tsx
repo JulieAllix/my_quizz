@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { useSelector } from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { 
     View,  
     StyleSheet,
@@ -10,6 +10,8 @@ import CustomInput from '../components/UI/CustomInput';
 import CustomButton from '../components/UI/CustomButton';
 import QuestionCard from '../components/QuestionCard';
 
+import { updateTheme } from '../store/actions/quizz';
+
 interface Props {
     route: any,
     navigation: any,
@@ -17,10 +19,12 @@ interface Props {
 
 const EditThemeScreen: React.FC<Props> = ({ route, navigation }) => {
     const {themeId} = route.params;
+    const dispatch = useDispatch();
     const thmId = JSON.parse(JSON.stringify(themeId));
-    const [inputText, setInputText] = useState<string>('');
     const themes = useSelector(state => state.quizz.themes);
     const selectedTheme = themes.find((theme: any) => theme.id == thmId);
+
+    const [inputText, setInputText] = useState<string>(selectedTheme.name);
 
     // To set the header title dynamically
     React.useLayoutEffect(() => {
@@ -28,6 +32,10 @@ const EditThemeScreen: React.FC<Props> = ({ route, navigation }) => {
             title: 'Edit : ' + selectedTheme.name,
         });
     });
+
+    useEffect(() => {
+        dispatch(updateTheme(inputText, themeId));
+    }, [inputText])
 
     const addNewQuestion = () => {
         navigation.navigate(
