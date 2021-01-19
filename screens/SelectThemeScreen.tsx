@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useSelector } from 'react-redux';
 import { 
     View, 
@@ -16,6 +16,10 @@ interface Props {
 
 const SelectThemeScreen: React.FC<Props> = (props) => {
     const themes = useSelector(state => state.quizz.themes);
+
+    useEffect(() => {
+        
+    }, [themes])
 
     const createNewTheme = () => {
         props.navigation.navigate(

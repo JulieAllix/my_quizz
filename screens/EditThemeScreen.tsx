@@ -10,7 +10,7 @@ import CustomInput from '../components/UI/CustomInput';
 import CustomButton from '../components/UI/CustomButton';
 import QuestionCard from '../components/QuestionCard';
 
-import { updateTheme } from '../store/actions/quizz';
+import { updateTheme, deleteTheme } from '../store/actions/quizz';
 
 interface Props {
     route: any,
@@ -19,23 +19,24 @@ interface Props {
 
 const EditThemeScreen: React.FC<Props> = ({ route, navigation }) => {
     const {themeId} = route.params;
+
     const dispatch = useDispatch();
     const thmId = JSON.parse(JSON.stringify(themeId));
     const themes = useSelector(state => state.quizz.themes);
-    const selectedTheme = themes.find((theme: any) => theme.id == thmId);
+    const selectedTheme = thmId ? themes.find((theme: any) => theme.id == thmId) : '';
 
-    const [inputText, setInputText] = useState<string>(selectedTheme.name);
-
+    const [inputText, setInputText] = useState<string>(selectedTheme ? selectedTheme.name : '');
+       
     // To set the header title dynamically
     React.useLayoutEffect(() => {
         navigation.setOptions({
-            title: 'Edit : ' + selectedTheme.name,
+            title: selectedTheme ? 'Edit : ' + selectedTheme.name : '',
         });
     });
 
     useEffect(() => {
         dispatch(updateTheme(inputText, themeId));
-    }, [inputText])
+    }, [inputText]);
 
     const addNewQuestion = () => {
         navigation.navigate(
@@ -43,8 +44,15 @@ const EditThemeScreen: React.FC<Props> = ({ route, navigation }) => {
             {themeId: thmId}
         );
     };
-    const deleteTheme = () => {
-
+    const deleteThemeHandler = () => {
+        navigation.navigate(
+            'Themes'
+        );
+        
+        setTimeout(() => {
+            dispatch(deleteTheme(themeId));
+        }, 500)
+        
     };
 
     return (
@@ -60,7 +68,7 @@ const EditThemeScreen: React.FC<Props> = ({ route, navigation }) => {
                 <QuestionCard color={'primary'}>Random question</QuestionCard>
             </View>
             <View style={styles.buttonsWrapper}>
-                <CustomButton color={'accent'} onPress={deleteTheme}>Delete theme</CustomButton>
+                <CustomButton color={'accent'} onPress={deleteThemeHandler}>Delete theme</CustomButton>
                 <CustomButton color={'primary'} onPress={addNewQuestion}>Add a new question</CustomButton>
             </View>
         </View>

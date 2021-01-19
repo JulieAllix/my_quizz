@@ -9,6 +9,7 @@ import {
     CREATE_QUIZZ,
     CREATE_THEME,
     UPDATE_THEME,
+    DELETE_THEME,
     CREATE_QUESTION
 } from '../actions/quizz';
 
@@ -66,6 +67,20 @@ const quizzReducer = (state = initialState, action: any) => {
                 ...state,
                 themes: updatedThemes
             }
+
+        case DELETE_THEME:
+            const deletedThemeUid = action.themeId;
+            const deletedThemeIndex = state.themes.findIndex(
+                theme => theme.id === deletedThemeUid
+            );
+            const themesList = [...state.themes];
+            themesList.splice(deletedThemeIndex,1)
+            
+            return {
+                ...state,
+                themes: themesList
+            }
+
         case CREATE_QUESTION:
             const questionUid = 'q-' + generateRandomUid();
             const themeId = action.themeId;

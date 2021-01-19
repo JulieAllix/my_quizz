@@ -24,7 +24,7 @@ const QuizzScreen: React.FC<Props> = ({ route, navigation }) => {
     // To set the header title dynamically
     React.useLayoutEffect(() => {
         navigation.setOptions({
-            title: selectedTheme.name,
+            title: selectedTheme ? selectedTheme.name : '',
         });
     });
 
